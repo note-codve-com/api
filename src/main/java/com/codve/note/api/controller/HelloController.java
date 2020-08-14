@@ -1,6 +1,8 @@
 package com.codve.note.api.controller;
 
+import com.codve.note.api.util.CommonResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -10,8 +12,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
 
-    @GetMapping(name = "/hello", produces = "application/json")
-    public String hello() {
-        return "hello, world";
+    @GetMapping("/hello")
+    public CommonResult hello() {
+        return CommonResult.success();
+    }
+
+    @GetMapping("/default-error")
+    public CommonResult error() {
+        return CommonResult.error();
+    }
+
+    @GetMapping("/custom-error")
+    public CommonResult customError() {
+        return CommonResult.error(123, "你搞错啦");
     }
 }
