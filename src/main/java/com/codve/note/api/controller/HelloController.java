@@ -2,7 +2,6 @@ package com.codve.note.api.controller;
 
 import com.codve.note.api.util.CommonResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
