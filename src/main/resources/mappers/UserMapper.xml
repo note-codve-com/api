@@ -7,19 +7,19 @@
         <id column="user_id" property="id" jdbcType="BIGINT" javaType="Long"/>
         <result column="mobile" property="mobile" jdbcType="VARCHAR" javaType="String"/>
         <result column="password" property="password" jdbcType="VARCHAR" javaType="String"/>
-        <result column="create_time" property="createTime" jdbcType="DATETIME" javaType="LocalDateTime"/>
-        <result column="update_time" property="updateTime" jdbcType="DATETIME" javaType="LocalDateTime"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" javaType="java.time.LocalDateTime"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" javaType="java.time.LocalDateTime"/>
     </resultMap>
 
     <insert id="save" parameterType="UserDO" useGeneratedKeys="true" keyProperty="id">
         insert into user (
         <trim suffixOverrides=",">
-            <if test="mobile != null">mobile</if>
-            <if test="password != null">password</if>
+            <if test="mobile != null">mobile,</if>
+            <if test="password != null">password,</if>
         </trim>)
         values (
         <trim suffixOverrides=",">
-            <if test="mobile != null">#{mobile}</if>
+            <if test="mobile != null">#{mobile},</if>
             <if test="password != null">#{password}</if>
         </trim>)
     </insert>
