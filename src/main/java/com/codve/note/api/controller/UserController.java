@@ -1,12 +1,14 @@
 package com.codve.note.api.controller;
 
 import com.codve.note.api.model.UserDO;
+import com.codve.note.api.model.vo.UserVO;
 import com.codve.note.api.service.UserService;
 import com.codve.note.api.util.CommonResult;
+import com.codve.note.api.util.UserValidation;
+import com.codve.note.api.util.convert.UserConvert;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author admin
@@ -23,11 +25,10 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/save")
-    public CommonResult save() {
-        UserDO userDO = new UserDO();
-        userDO.setMobile("18519341520");
-        userDO.setPassword("123456");
+    @PostMapping("/save")
+    public CommonResult save(@RequestBody @Validated UserVO userVO) {
+        UserValidation.passwordCheck(userVO);
+        UserDO userDO = UserConvert.convert(userVO);
         userService.save(userDO);
         return CommonResult.success();
     }
