@@ -1,7 +1,6 @@
 package com.codve.note.api.aspect;
 
 import com.codve.note.api.model.UserDO;
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -18,7 +17,7 @@ public class UserServiceAspect {
     private PasswordEncoder encoder;
 
     @Autowired
-    public UserServiceAspect(PasswordEncoder encoder) {
+    public void setEncoder(PasswordEncoder encoder) {
         this.encoder = encoder;
     }
 

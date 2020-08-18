@@ -1,13 +1,16 @@
 package com.codve.note.api.config;
 
+import com.codve.note.api.handler.AccessDeniedHandlerImpl;
+import com.codve.note.api.handler.AuthExceptionHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 /**
  * @author admin
@@ -17,21 +20,27 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .csrf().disable()
-//                .exceptionHandling().authenticationEntryPoint()
-//
-//    }
-
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        String password = encoder().encode("password");
-        auth
-                .inMemoryAuthentication()
-                .withUser("user").password(password).roles("USER");
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .csrf().disable()
+                .exceptionHandling().authenticationEntryPoint(authExceptionHandler()).and()
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler()).and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .authorizeRequests().anyRequest().permitAll();
+
     }
+
+    @Bean
+    public AuthExceptionHandler authExceptionHandler() {
+        return new AuthExceptionHandler();
+    }
+
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return new AccessDeniedHandlerImpl();
+    }
+
 
     @Bean
     public PasswordEncoder encoder() {

@@ -3,7 +3,6 @@ package com.codve.note.api.controller;
 import com.codve.note.api.model.UserDO;
 import com.codve.note.api.service.UserService;
 import com.codve.note.api.util.CommonResult;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

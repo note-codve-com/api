@@ -1,5 +1,6 @@
 package com.codve.note.api.util;
 
+import com.codve.note.api.exception.EX;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
@@ -21,8 +22,8 @@ public class CommonResult<T> {
         return newInstance(0, "success");
     }
 
-    public static CommonResult error() {
-        return newInstance(999, "error");
+    public static CommonResult error(EX ex) {
+        return newInstance(ex.getCode(), ex.getMsg());
     }
 
     public static CommonResult error(int code, String msg) {

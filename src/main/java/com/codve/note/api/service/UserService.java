@@ -1,7 +1,6 @@
 package com.codve.note.api.service;
 
 import com.codve.note.api.model.UserDO;
-import org.springframework.stereotype.Service;
 
 /**
  * @author admin

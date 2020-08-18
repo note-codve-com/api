@@ -1,5 +1,6 @@
 package com.codve.note.api.controller;
 
+import com.codve.note.api.exception.EX;
 import com.codve.note.api.util.CommonResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,11 +19,11 @@ public class HelloController {
 
     @GetMapping("/default-error")
     public CommonResult error() {
-        return CommonResult.error();
+        return CommonResult.error(EX.E_999);
     }
 
     @GetMapping("/custom-error")
     public CommonResult customError() {
-        return CommonResult.error(123, "你搞错啦");
+        return CommonResult.error(321, "你搞错啦");
     }
 }
