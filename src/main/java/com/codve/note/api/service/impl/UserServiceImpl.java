@@ -31,4 +31,18 @@ public class UserServiceImpl implements UserService {
         }
         return result;
     }
+
+    @Override
+    public int deleteById(Long id) {
+        int result = userMapper.deleteById(id);
+        if (result != 1) {
+            exception(EX.E_1102);
+        }
+        return result;
+    }
+
+    @Override
+    public int update(UserDO userDO) {
+        return 0;
+    }
 }

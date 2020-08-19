@@ -26,6 +26,8 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
+import javax.validation.ConstraintViolationException;
+
 /**
  * @author admin
  * @date 2020/8/18 11:08
@@ -97,15 +99,15 @@ public class GlobalExceptionHandler {
         return CommonResult.error(EX.E_1003.getCode(), objectError.getDefaultMessage());
     }
 
-//    /**
-//     * 普通参数验证失败
-//     * @param e 异常
-//     * @return commonResult
-//     */
-//    @ExceptionHandler(ConstraintViolationException.class)
-//    public CommonResult invalid2(ConstraintViolationException e) {
-//        return CommonResult.error(EX.E_1003.getCode(), e.getMessage());
-//    }
+    /**
+     * 普通参数验证失败
+     * @param e 异常
+     * @return commonResult
+     */
+    @ExceptionHandler(ConstraintViolationException.class)
+    public CommonResult invalid2(ConstraintViolationException e) {
+        return CommonResult.error(EX.E_1003.getCode(), e.getMessage());
+    }
 
     /**
      * 普通参数类型不匹配

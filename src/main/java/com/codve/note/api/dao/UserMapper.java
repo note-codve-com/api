@@ -11,4 +11,8 @@ import org.springframework.stereotype.Repository;
 public interface UserMapper {
 
     int save(UserDO userDO);
+
+    int deleteById(Long id);
+
+    int update(UserDO userDO);
 }

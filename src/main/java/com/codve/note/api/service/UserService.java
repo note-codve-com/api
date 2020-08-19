@@ -10,4 +10,8 @@ public interface UserService {
 
     int save(UserDO userDO);
 
+    int deleteById(Long id);
+
+    int update(UserDO userDO);
+
 }
